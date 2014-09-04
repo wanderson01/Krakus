@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 
 Project("{F85904D6-091E-B84C-BDD4-CFA5BB39AF96}") = "Krakus", "Assembly-CSharp-firstpass-vs.csproj", "{F1E81C45-6B25-BD7F-7D86-06038FD5F6E9}"
 EndProject
+Project("{F85904D6-091E-B84C-BDD4-CFA5BB39AF96}") = "Krakus", "Assembly-CSharp-vs.csproj", "{823DF9BE-A6D0-F799-D816-D79770F586F2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,11 +15,15 @@ Global
 		{F1E81C45-6B25-BD7F-7D86-06038FD5F6E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1E81C45-6B25-BD7F-7D86-06038FD5F6E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1E81C45-6B25-BD7F-7D86-06038FD5F6E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{823DF9BE-A6D0-F799-D816-D79770F586F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{823DF9BE-A6D0-F799-D816-D79770F586F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{823DF9BE-A6D0-F799-D816-D79770F586F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{823DF9BE-A6D0-F799-D816-D79770F586F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-																								GlobalSection(MonoDevelopProperties) = preSolution
+																																		GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1

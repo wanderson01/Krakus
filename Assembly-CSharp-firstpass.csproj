@@ -47,22 +47,6 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Standard Assets\Character Controllers\Sources\Scripts\MouseLook.cs" />
-     <Compile Include="Assets\Standard Assets\Scripts\ActivateTrigger.cs" />
-     <Compile Include="Assets\Standard Assets\Scripts\AnimationScript.cs" />
-     <Compile Include="Assets\Standard Assets\Scripts\Archer.cs" />
-     <Compile Include="Assets\Standard Assets\Scripts\ArrowPhysics.cs" />
-     <Compile Include="Assets\Standard Assets\Scripts\BaseUnit.cs" />
-     <Compile Include="Assets\Standard Assets\Scripts\BoxController.cs" />
-     <Compile Include="Assets\Standard Assets\Scripts\CubeTest.cs" />
-     <Compile Include="Assets\Standard Assets\Scripts\Death.cs" />
-     <Compile Include="Assets\Standard Assets\Scripts\GUI_Aim.cs" />
-     <Compile Include="Assets\Standard Assets\Scripts\JumpWall.cs" />
-     <Compile Include="Assets\Standard Assets\Scripts\MouseController.cs" />
-     <Compile Include="Assets\Standard Assets\Scripts\MovementController.cs" />
-     <Compile Include="Assets\Standard Assets\Scripts\PlatformNoCollision.cs" />
-     <Compile Include="Assets\Standard Assets\Scripts\Raycast.cs" />
-     <Compile Include="Assets\Standard Assets\Scripts\Target_Behavior.cs" />
-     <Compile Include="Assets\Standard Assets\Scripts\UnitRaycast.cs" />
      <None Include="Assets\Standard Assets\Projectors\Guidelines.txt" />
      <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-Basic.shader" />
      <None Include="Assets\Standard Assets\Projectors\Sources\Shaders\Projector Multiply.shader" />
