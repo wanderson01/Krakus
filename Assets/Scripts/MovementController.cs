@@ -7,26 +7,28 @@ public class MovementController : MonoBehaviour {
 	public float speed = 2.5f;
 	public float jumpPower = 23f;
 	public float gravity = 50.0f;
-	public State state;
+	public float minVerticalPower = -30;
+	public ActionState state;
 	public int attackCombo = 0;
 	private Vector2 moveDirection = Vector2.zero;
 	private CharacterController controller;
 	private float verticalPower = 0;
 	private Animator _animator;
-	private float tempPosition;
+	public float tempPosition;
 	private float newTime = 0;
 	private Raycast raycast;
 	public bool attacking = false;
-
+	public int wjCounter;
 	
 	void Start ()
 	{
+		tempPosition = transform.position.x;
 		controller  = GetComponent<CharacterController>();
 		raycast = GetComponentInChildren<Raycast> ();
 		_animator = GetComponentInChildren<Animator>();
 	}
 	
-	public enum State{
+	public enum ActionState{
 		
 		Stand,
 		Jump,
@@ -37,92 +39,122 @@ public class MovementController : MonoBehaviour {
 	}
 	
 	void Update() {
-		
+
 		Orientation();
 		Attack ();
 		Move ();
+		StepDownPlatform ();
 	}
-
+	
 	void Move(){
+
+		if (raycast.IsGrounded()){
+			wjCounter = 0;
+		}
 
 		if (raycast.IsGrounded() && !attacking) {
 			
-			state = State.Stand;
+			state = ActionState.Stand;
 			
-			if (Input.GetButtonDown ("Jump")){
+			if (Input.GetButtonDown ("Jump") && !Input.GetKey(KeyCode.S)){
 				
 				_animator.SetBool("jump", true);
 				verticalPower = jumpPower;
+				state = ActionState.Jump;
 			}
 		}
 		
-		else if (!raycast.IsGrounded() && state != State.WallJump && 
-		         						  state != State.BackJump &&
-		                                  state != State.AttackJump){
-			state = State.Jump;
+		else if (!raycast.IsGrounded() && state != ActionState.WallJump && 
+		       						      state != ActionState.BackJump &&
+		       							  state != ActionState.AttackJump){
+			state = ActionState.Jump;
 		}
-
-		switch (state){
 		
-		case State.Stand:
+		switch (state){
+			
+		case ActionState.Stand:
 
 			_animator.SetBool("jump", false);
 			_animator.SetFloat("walk", Mathf.Abs(Input.GetAxis("Horizontal")));
 			moveDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 			moveDirection *= speed;
 			break;
-
-		case State.Jump:
-
+			
+		case ActionState.Jump:
+			
 			_animator.SetBool("jump", true);
 			moveDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 			moveDirection *= speed;
+			
+			WallJump();
 
-			if (raycast.CanWallJump() && state == State.Jump){
-				
-				if (Input.GetButtonDown ("Jump") && Input.GetAxisRaw("Horizontal") != 0){
-					if (state != State.BackJump){
-						state = State.WallJump;
-					}
-					verticalPower = jumpPower;
-					moveDirection = transform.TransformDirection(-Vector3.right.x + 0.2f, 0, 0);
-					moveDirection *= speed;
-				}
-			}
 			break;
-
-		case State.WallJump:
+			
+		case ActionState.WallJump:
 
 			if (DistanceFromObject (raycast.raycastPoint) > 8) {
-				state = State.BackJump;
+				state = ActionState.BackJump;
 			}
-			break;
 
-		case State.BackJump:
+			WallJump();
+
+			break;
+			
+		case ActionState.BackJump:
 
 			if (Input.GetButton("Horizontal")){
 				moveDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 				moveDirection *= speed + 10;
-				state = State.Jump;
+				state = ActionState.Jump;
 			}
+
+			WallJump();
+
 			break;
 		}
 
-		verticalPower -= gravity * Time.deltaTime;
+		if (verticalPower >= minVerticalPower){
+
+			verticalPower -= gravity * Time.deltaTime;
+		}
+		else {
+			verticalPower = minVerticalPower;
+		}
+
 		moveDirection.y = verticalPower;
+	
 		controller.Move(moveDirection * Time.deltaTime);
+	//	print (moveDirection.y);
+	}
+
+	void WallJump(){
+
+		if (raycast.CanWallJump()){
+//			print (raycast.CanWallJump());
+			if (Input.GetButtonDown ("Jump") && Input.GetAxisRaw("Horizontal") != 0){
+				if (state != ActionState.BackJump){
+					state = ActionState.WallJump;
+				}
+				wjCounter += 1;
+				print ("Vert Antes " + verticalPower);
+				verticalPower = jumpPower; //+ 3 * wjCounter;
+
+				print ("Vert Depois " + verticalPower);
+				moveDirection = transform.TransformDirection(-Vector3.right.x + 0.2f, 0, 0);
+				moveDirection *= speed;
+			}
+		}
 	}
 	
 	void Orientation(){
 		
 		if (transform.position.x > tempPosition) {
-			transform.eulerAngles = new Vector2(0,0);
+			transform.eulerAngles = new Vector3(0,0,0);
 		}
 		else if (transform.position.x < tempPosition){
-			transform.eulerAngles = new Vector2(0, 180);
+			transform.eulerAngles = new Vector3(0, 180, 0);
 		}
 		tempPosition = transform.position.x;
-		
 	}
 	
 	float DistanceFromObject (Vector2 ObjectPosition){
@@ -135,29 +167,29 @@ public class MovementController : MonoBehaviour {
 	void Attack(){
 		
 		if (Input.GetButtonDown("Fire1")){
-
+			
 			switch (state){
-			case State.Stand:
+			case ActionState.Stand:
 				AttackGround();
 				break;
-
-			case State.AttackGround:
+				
+			case ActionState.AttackGround:
 				AttackGround();
 				break;
-
-			case State.Jump:
+				
+			case ActionState.Jump:
 				AttackJump();
 				break;
-
-			case State.AttackJump:
+				
+			case ActionState.AttackJump:
 				AttackJump();
 				break;
-
-			case State.WallJump:
+				
+			case ActionState.WallJump:
 				AttackJump();
 				break;
-
-			case State.BackJump:
+				
+			case ActionState.BackJump:
 				AttackJump();
 				break;
 			}
@@ -172,14 +204,14 @@ public class MovementController : MonoBehaviour {
 		
 		attacking = true;
 		StopWalking();
-		state = State.AttackGround;
+		state = ActionState.AttackGround;
 		attackCombo += 1;
 		_animator.SetInteger("combo", attackCombo);
 	}
 	
 	void AttackJump(){
 		
-		state = State.AttackJump;
+		state = ActionState.AttackJump;
 		attackCombo = 1;
 		_animator.SetInteger("combo", attackCombo);
 	}
@@ -188,5 +220,20 @@ public class MovementController : MonoBehaviour {
 		
 		moveDirection *= 0;
 		_animator.SetFloat("walk", 0);
+	}
+	
+	void StepDownPlatform(){
+		
+		if (raycast.IsGrounded ()) {
+			if (raycast.IsGrounded().collider.name == "Platform_OneWay"){
+				GameObject oneWayPlatform = raycast.IsGrounded().collider.gameObject;
+				
+				if (Input.GetButtonDown ("Jump") && Input.GetKey(KeyCode.S)){
+					
+					oneWayPlatform.GetComponentInChildren<OneWayCollision>().BehaviorActive = false;
+					Physics.IgnoreCollision(this.gameObject.collider, oneWayPlatform.collider);
+				}
+			}
+		}
 	}
 }

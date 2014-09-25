@@ -46,6 +46,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Resources\Personagem.cs" />
      <Compile Include="Assets\Scripts\ActivateTrigger.cs" />
      <Compile Include="Assets\Scripts\AnimationScript.cs" />
      <Compile Include="Assets\Scripts\Archer.cs" />
@@ -54,11 +55,14 @@
      <Compile Include="Assets\Scripts\BoxController.cs" />
      <Compile Include="Assets\Scripts\CubeTest.cs" />
      <Compile Include="Assets\Scripts\Death.cs" />
+     <Compile Include="Assets\Scripts\EnemyAI.cs" />
+     <Compile Include="Assets\Scripts\EnemyDeath.cs" />
      <Compile Include="Assets\Scripts\GUI_Aim.cs" />
      <Compile Include="Assets\Scripts\JumpWall.cs" />
+     <Compile Include="Assets\Scripts\LosTrigger.cs" />
      <Compile Include="Assets\Scripts\MouseController.cs" />
      <Compile Include="Assets\Scripts\MovementController.cs" />
-     <Compile Include="Assets\Scripts\PlatformNoCollision.cs" />
+     <Compile Include="Assets\Scripts\OneWayCollision.cs" />
      <Compile Include="Assets\Scripts\Raycast.cs" />
      <Compile Include="Assets\Scripts\Target_Behavior.cs" />
      <Compile Include="Assets\Scripts\UnitRaycast.cs" />

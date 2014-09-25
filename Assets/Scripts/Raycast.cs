@@ -16,41 +16,22 @@ public class Raycast : MonoBehaviour {
 		grounded = IsGrounded();
 	}
 	
-	public bool IsGrounded(){
+	public GameObject IsGrounded(){
 		
-		RaycastHit raycastHit;
+		RaycastHit hit;
 		var down = -(transform.TransformDirection(Vector3.up));
 		Debug.DrawRay(transform.position, down * groundedRaycastLength, Color.yellow);
 		
-		if (Physics.Raycast(transform.position, down, out raycastHit, groundedRaycastLength, layerMask)){
-			if(raycastHit.collider.tag == "Map"){
-				return true;
+		if (Physics.Raycast(transform.position, down, out hit, groundedRaycastLength, layerMask)){
+			if(hit.collider.tag == "Map"){
+				return hit.collider.gameObject;
 			}
 			else {
-				return false;
+				return null;
 			}
 		}
 		else {
-			return false;
-		}
-	}
-	
-	void OnPlatform(){
-		
-		var down = -(transform.TransformDirection(Vector3.up));
-		Debug.DrawRay(transform.position, down * groundedRaycastLength, Color.yellow);
-		
-		RaycastHit2D hit = Physics2D.Raycast(transform.position, down, groundedRaycastLength, layerMask);
-		if (hit){
-			if (hit.collider.name == "Platform_OneWay"){
-				//	transform.parent.GetComponent<MovementController>().OnPlatform = true;
-			}
-			else {
-				//	transform.parent.GetComponent<MovementController>().OnPlatform = false;
-			}
-		}
-		else {
-			//	transform.parent.GetComponent<MovementController>().OnPlatform = false;
+			return null;
 		}
 	}
 	
@@ -60,10 +41,15 @@ public class Raycast : MonoBehaviour {
 		Debug.DrawRay(transform.position, right * walljumpRaycastLength, Color.yellow);
 		
 		if (Physics.Raycast(transform.position, right, out walljumpRaycastHit, walljumpRaycastLength)){
-			print (walljumpRaycastHit.collider.name);
-			if(walljumpRaycastHit.collider.tag == "Map"){ 
-				raycastPoint = walljumpRaycastHit.point;
-				return true;
+	//		print (walljumpRaycastHit.collider.name);
+			if (!IsGrounded()){
+				if(walljumpRaycastHit.collider.tag == "Map"){ 
+					raycastPoint = walljumpRaycastHit.point;
+					return true;
+				}
+				else {
+					return false;
+				}
 			}
 			else {
 				return false;
@@ -75,4 +61,4 @@ public class Raycast : MonoBehaviour {
 	}
 }
 
-	
+
