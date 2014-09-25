@@ -63,6 +63,7 @@
      <Compile Include="Assets\Scripts\MouseController.cs" />
      <Compile Include="Assets\Scripts\MovementController.cs" />
      <Compile Include="Assets\Scripts\OneWayCollision.cs" />
+     <Compile Include="Assets\Scripts\PatrolCheckpointBehavior.cs" />
      <Compile Include="Assets\Scripts\Raycast.cs" />
      <Compile Include="Assets\Scripts\Target_Behavior.cs" />
      <Compile Include="Assets\Scripts\UnitRaycast.cs" />

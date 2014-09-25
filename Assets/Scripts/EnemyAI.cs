@@ -5,13 +5,17 @@ public class EnemyAI : MonoBehaviour {
 
 	public RaycastHit hit;
 	public GameObject target;
+	public GameObject initialCheckpoint;
+	public State state;
 	public int health;
 	public float attackRange = 9.0f;
-	public float moveSpeed = 5.0f;
+	public float alertedSpeed;
+	public float patrolSpeed;
 	public float attackSpeed;
 	public int damage;
 	public Vector3 targetLastPosition;
-	public bool alerted;
+	public float alertMaxTime;
+	public float alertTimer;
 	public LosTrigger lostrigger;
 	public bool targetonSight;
 	public bool isGrounded;
@@ -28,16 +32,19 @@ public class EnemyAI : MonoBehaviour {
 	public bool attacking = false;
 	private float nextAttack = 0;
 	private int layerMask = 1 << 10 | 1 << 8;
+	private Transform waypoint;
 	
 	void Awake(){
 		
 	//	Physics.IgnoreLayerCollision(9, 9);
 	//	Physics.IgnoreLayerCollision(8, 9);
 	//	Physics.IgnoreLayerCollision(9, 10);
-		
+
+		state = State.Patrol;
+		target = initialCheckpoint;
 		health = 100;
 		lostrigger = GetComponentInChildren<LosTrigger>();
-		alerted = false;
+		waypoint = transform.FindChild("EnemyWaypoint");
 		targetLastPosition = Vector3.zero;
 		jumpObstacle = false;
 		isGrounded = false;
@@ -52,17 +59,54 @@ public class EnemyAI : MonoBehaviour {
 	//	print ("PathClear: " + PathClear ());
 		IsGrounded();
 		PathClear();
-		//Jump(jumpState);
-		//	ApplyGravity();
-		
+
 		if(lostrigger.triggered){
 			RaycastTargetDetection();
 		}
-		
-		//verticalPower -= gravity * Time.deltaTime; // <----------- TO DO
-		//moveDirection.y = verticalPower;
+		StateMachine ();
 	}
 
+	public enum State{
+
+		Patrol,
+		Alerted
+	}
+
+	void StateMachine(){
+
+		switch (state) {
+		
+		case State.Patrol:
+			Patrol();
+			break;
+
+		case State.Alerted:
+			SetTargetWaypoint();
+			AlertTimer();
+			break;	
+		}
+	}
+
+	void Patrol(){
+
+		EnemyMovement ();
+		LookAtIgnoreHeight(target.transform.position);
+	}
+	/*
+	void OnTriggerEnter(Collider col){
+
+		if (state == State.Patrol && col.tag == "Patrol Checkpoint"){
+			print ("collide");
+			if (target == patrolCheckpoint[0]){
+				target = patrolCheckpoint[1];
+			}
+			else {
+				target = patrolCheckpoint[0];
+			}
+			LookAtIgnoreHeight(target.transform.position);
+		}
+	}
+*/
 	void ApplyGravity(){
 		
 		if (!IsGrounded()){
@@ -108,42 +152,40 @@ public class EnemyAI : MonoBehaviour {
 			return true;
 		}
 	}
-
 	
 	void RaycastTargetDetection(){
 		
 		if (lostrigger.losTarget != null){
 			if (Physics.Raycast(transform.position, (lostrigger.losTarget.transform.position - transform.position), out hit, Mathf.Infinity, layerMask)) {
-				
-				target = hit.collider.gameObject;
-				Debug.DrawRay(transform.position, (lostrigger.losTarget.transform.position - transform.position), Color.blue);
-				
+								
 				if (hit.collider.tag == "Player"){
-					alerted = true;
+					target = hit.collider.gameObject;
+					Debug.DrawRay(transform.position, (lostrigger.losTarget.transform.position - transform.position), Color.blue);
+					state = State.Alerted;
 					targetonSight = true;
 				}
 				else{
 					targetonSight = false;
 				}
-				
-				CreateWaypoint();
 			}
 		}
 	}
-
-		
-	void CreateWaypoint(){
+	
+	void SetTargetWaypoint(){
 			
-		if (alerted){
+		if (state == State.Alerted){
 			
 			if (targetonSight){
 				targetLastPosition = new Vector3(hit.point.x, transform.position.y, transform.position.z);
+				waypoint.position = Vector3.zero;
 			}
 			else{
-				targetLastPosition = hit.point;
-				transform.FindChild("EnemyWaypoint").transform.position = targetLastPosition;
-				Debug.DrawRay(transform.position, (hit.point - transform.position), Color.red);
-				Debug.DrawRay(transform.position, (transform.FindChild("EnemyWaypoint").transform.position - transform.position), Color.green);
+				if (waypoint.position == Vector3.zero){
+					targetLastPosition = hit.point;
+					transform.FindChild("EnemyWaypoint").transform.position = targetLastPosition;
+					Debug.DrawRay(transform.position, (hit.point - transform.position), Color.red);
+					Debug.DrawRay(transform.position, (transform.FindChild("EnemyWaypoint").transform.position - transform.position), Color.green);
+				}
 			}
 			LookAtIgnoreHeight(targetLastPosition);
 			CheckDistanceToTarget(targetLastPosition);
@@ -172,12 +214,12 @@ public class EnemyAI : MonoBehaviour {
 			}
 			else
 			{
-				EnemyMovement(targetLastPosition);
+				EnemyMovement();
 			}
 		}
 
-		else if (alerted){
-			EnemyMovement(targetLastPosition);
+		else if (state == State.Alerted){
+			EnemyMovement();
 		}
 	}
 
@@ -194,10 +236,10 @@ public class EnemyAI : MonoBehaviour {
 	void AttackAnimation(){
 		
 		if (transform.position.x > target.transform.position.x){
-	//		animation.Play("Alien_Attack_180");
+			//animation.Play("Enemy_Attack_180");
 		}
 		else{
-	//		animation.Play("Alien_Attack");
+			//animation.Play("Enemy_Attack");
 		}
 	}
 	
@@ -211,27 +253,52 @@ public class EnemyAI : MonoBehaviour {
 		
 	}
 	
-	void EnemyMovement(Vector3 targetLastPosition){
+	void EnemyMovement(){
+
+		float moveSpeed;
+
+		if (state == State.Alerted){
+			moveSpeed = alertedSpeed;
+		}
+		else {
+			moveSpeed = patrolSpeed;
+		}
 		
 		if((IsGrounded()) && (PathClear())){
-			
-			lastGroundedPosition = transform.position;
+
 			moveDirection = transform.right;
 			moveDirection *= moveSpeed;
 			rigidbody.MovePosition(rigidbody.position + moveDirection * Time.deltaTime);
 		}
 		
 		else if ((IsGrounded()) && !(PathClear())) {
-		//	jumpObstacle = true;
-		//	jump();
-		//	lastGroundedPosition = transform.position;
+
 			moveDirection = transform.right;
 			moveDirection *= moveSpeed;
 			rigidbody.MovePosition(rigidbody.position + moveDirection * Time.deltaTime);
 		}
-		else{
-			//	rigidbody.velocity = Vector2.zero;
-			return;
+	}
+
+	void AlertTimer(){
+
+		if (targetonSight){
+			alertTimer = alertMaxTime;
 		}
+		else {
+			if (alertTimer > 0){
+				alertTimer -= Time.deltaTime;
+			}
+			else {
+				AlertReset();
+			}
+		}
+	}
+
+	void AlertReset(){
+
+		target = initialCheckpoint;
+		lostrigger.losTarget = null;
+		lostrigger.triggered = false;
+		state = State.Patrol;
 	}
 }
