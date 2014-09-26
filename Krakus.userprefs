@@ -1,10 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\EnemyAI.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\PatrolCheckpointBehavior.cs">
     <Files>
-      <File FileName="Assets\Scripts\EnemyAI.cs" Line="292" Column="18" />
-      <File FileName="Assets\Scripts\LosTrigger.cs" Line="15" Column="18" />
-      <File FileName="Assets\Scripts\PatrolCheckpointBehavior.cs" Line="51" Column="2" />
+      <File FileName="Assets\Scripts\LosTrigger.cs" Line="26" Column="1" />
+      <File FileName="Assets\Scripts\EnemyAI.cs" Line="208" Column="4" />
+      <File FileName="Assets\Scripts\PatrolCheckpointBehavior.cs" Line="18" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

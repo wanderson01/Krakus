@@ -8,27 +8,31 @@ public class PatrolCheckpointBehavior : MonoBehaviour {
 	private EnemyAI enemy;
 	private GameObject checkpointLeft;
 	private GameObject checkpointRight;
-	private bool collisioned;
+	private bool triggered;
+	private int stayCounter;
 
 	void Start(){
 
-		collisioned = false;
+		triggered = false;
 		enemy = patrollingObj.GetComponent<EnemyAI>();
+	}
 
-		foreach (Transform child in transform.parent) {
+	void Update(){
+		//CheckifContains ();
+	}
 
-			if (child.name == "CheckpointRight") {
-				checkpointRight = child.gameObject;
-			}
-			else{
-				checkpointLeft = child.gameObject;
+	void CheckifContains (){
+
+		if (enemy.state == EnemyAI.State.Patrol){
+			if (collider.bounds.Contains (patrollingObj.transform.position)) {
+				enemy.target = otherCheckpoint;
 			}
 		}
 	}
 
 	void OnTriggerEnter(Collider col){
 		
-		if (col.gameObject == patrollingObj && enemy.state == EnemyAI.State.Patrol  && collisioned == false){
+		if (col.gameObject == patrollingObj && enemy.state == EnemyAI.State.Patrol  && triggered == false){
 			print ("collider");
 			if (enemy.target == this.gameObject){
 				enemy.target = otherCheckpoint;
@@ -36,30 +40,29 @@ public class PatrolCheckpointBehavior : MonoBehaviour {
 			else {
 				enemy.target = this.gameObject;
 			}
-			collisioned = true;
+			triggered = true;
 		//	LookAtIgnoreHeight(target.transform.position);
 		}
 	}
 
 	void OnTriggerExit(Collider col){
 		
-		if (col.gameObject == patrollingObj && enemy.state == EnemyAI.State.Patrol && collisioned == true){
+		if (col.gameObject == patrollingObj && enemy.state == EnemyAI.State.Patrol && triggered == true){
 
-			collisioned = false;
+			triggered = false;
 		}
 	}
 
 	void OnTriggerStay(Collider col){
 
-		if (col.gameObject == patrollingObj && enemy.state == EnemyAI.State.Patrol && collisioned == false){
+		if (col.gameObject == patrollingObj && enemy.state == EnemyAI.State.Patrol){
 
-			if (enemy.target == this.gameObject){
+			stayCounter += 1;
+			if (stayCounter > 1){
 				enemy.target = otherCheckpoint;
+
+				stayCounter = 0;
 			}
-			else {
-				enemy.target = this.gameObject;
-			}
-			collisioned = true;
 		}
 	}
 }

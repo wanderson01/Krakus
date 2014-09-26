@@ -8,7 +8,7 @@ public class EnemyAI : MonoBehaviour {
 	public GameObject initialCheckpoint;
 	public State state;
 	public int health;
-	public float attackRange = 9.0f;
+	public float attackRange;
 	public float alertedSpeed;
 	public float patrolSpeed;
 	public float attackSpeed;
@@ -17,7 +17,7 @@ public class EnemyAI : MonoBehaviour {
 	public float alertMaxTime;
 	public float alertTimer;
 	public LosTrigger lostrigger;
-	public bool targetonSight;
+	public bool targetOnSight;
 	public bool isGrounded;
 	public float verticalPower;
 	public float jumpPower = 10f;
@@ -92,21 +92,7 @@ public class EnemyAI : MonoBehaviour {
 		EnemyMovement ();
 		LookAtIgnoreHeight(target.transform.position);
 	}
-	/*
-	void OnTriggerEnter(Collider col){
 
-		if (state == State.Patrol && col.tag == "Patrol Checkpoint"){
-			print ("collide");
-			if (target == patrolCheckpoint[0]){
-				target = patrolCheckpoint[1];
-			}
-			else {
-				target = patrolCheckpoint[0];
-			}
-			LookAtIgnoreHeight(target.transform.position);
-		}
-	}
-*/
 	void ApplyGravity(){
 		
 		if (!IsGrounded()){
@@ -155,17 +141,17 @@ public class EnemyAI : MonoBehaviour {
 	
 	void RaycastTargetDetection(){
 		
-		if (lostrigger.losTarget != null){
+		if (lostrigger.losTarget != null && lostrigger.onSightArea){
 			if (Physics.Raycast(transform.position, (lostrigger.losTarget.transform.position - transform.position), out hit, Mathf.Infinity, layerMask)) {
 								
 				if (hit.collider.tag == "Player"){
 					target = hit.collider.gameObject;
 					Debug.DrawRay(transform.position, (lostrigger.losTarget.transform.position - transform.position), Color.blue);
 					state = State.Alerted;
-					targetonSight = true;
+					targetOnSight = true;
 				}
 				else{
-					targetonSight = false;
+					targetOnSight = false;
 				}
 			}
 		}
@@ -175,8 +161,8 @@ public class EnemyAI : MonoBehaviour {
 			
 		if (state == State.Alerted){
 			
-			if (targetonSight){
-				targetLastPosition = new Vector3(hit.point.x, transform.position.y, transform.position.z);
+			if (targetOnSight){
+				targetLastPosition = new Vector3(target.transform.position.x, transform.position.y, transform.position.z);
 				waypoint.position = Vector3.zero;
 			}
 			else{
@@ -203,11 +189,11 @@ public class EnemyAI : MonoBehaviour {
 	}
 	
 	void CheckDistanceToTarget(Vector3 targetLastPosition){
-		
-		if(targetonSight){
-			
-			var targetDistance = Vector3.Distance(targetLastPosition, transform.position);
-			
+
+		float targetDistance =  Mathf.Abs (targetLastPosition.x - transform.position.x);
+
+		if(targetOnSight){
+
 			if (targetDistance < attackRange)
 			{
 				Attacking();
@@ -219,7 +205,10 @@ public class EnemyAI : MonoBehaviour {
 		}
 
 		else if (state == State.Alerted){
-			EnemyMovement();
+
+			if (targetDistance < attackRange){
+				EnemyMovement();
+			}
 		}
 	}
 
@@ -263,25 +252,25 @@ public class EnemyAI : MonoBehaviour {
 		else {
 			moveSpeed = patrolSpeed;
 		}
-		
-		if((IsGrounded()) && (PathClear())){
+		if (IsGrounded()){
+			if(PathClear()){
 
-			moveDirection = transform.right;
-			moveDirection *= moveSpeed;
-			rigidbody.MovePosition(rigidbody.position + moveDirection * Time.deltaTime);
-		}
-		
-		else if ((IsGrounded()) && !(PathClear())) {
-
-			moveDirection = transform.right;
-			moveDirection *= moveSpeed;
-			rigidbody.MovePosition(rigidbody.position + moveDirection * Time.deltaTime);
+				moveDirection = transform.right;
+				moveDirection *= moveSpeed;
+				rigidbody.MovePosition(rigidbody.position + moveDirection * Time.deltaTime);
+			}
+			/*		
+			else {
+				moveDirection = transform.right;
+				moveDirection *= moveSpeed;
+				rigidbody.MovePosition(rigidbody.position + moveDirection * Time.deltaTime);
+			}*/
 		}
 	}
 
 	void AlertTimer(){
 
-		if (targetonSight){
+		if (targetOnSight){
 			alertTimer = alertMaxTime;
 		}
 		else {

@@ -5,19 +5,21 @@ public class LosTrigger : MonoBehaviour {
 
 	public GameObject losTarget;
 	public bool triggered;
-	
-	void Awake (){
-		losTarget = GameObject.Find("EmptyTarget");
+	public bool onSightArea;
+
+	void OnTriggerStay (Collider collision) {
+		
+		if(collision.gameObject.tag == "Player"){
+			losTarget = collision.gameObject;
+			onSightArea = true;
+			triggered = true;
+		}
 	}
-		
-	void OnTriggerEnter (Collider collision) {
-		
-		if (collision){
-			if(collision.gameObject.tag == "Player"){
-				
-				losTarget = collision.gameObject;
-				triggered = true;
-			}
+
+	void OnTriggerExit (Collider collision){
+
+		if (collision.gameObject.tag == "Player") {
+			onSightArea = false;	
 		}
 	}
 }
