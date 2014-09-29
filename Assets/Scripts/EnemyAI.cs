@@ -7,12 +7,6 @@ public class EnemyAI : MonoBehaviour {
 	public GameObject target;
 	public GameObject initialCheckpoint;
 	public State state;
-	public int health;
-	public float attackRange;
-	public float alertedSpeed;
-	public float patrolSpeed;
-	public float attackSpeed;
-	public int damage;
 	public Vector3 targetLastPosition;
 	public float alertMaxTime;
 	public float alertTimer;
@@ -33,16 +27,17 @@ public class EnemyAI : MonoBehaviour {
 	private float nextAttack = 0;
 	private int layerMask = 1 << 10 | 1 << 8;
 	private Transform waypoint;
+	public float attackRange;
+	private BaseCharacter baseChar;
 	
 	void Awake(){
 		
 	//	Physics.IgnoreLayerCollision(9, 9);
 	//	Physics.IgnoreLayerCollision(8, 9);
 	//	Physics.IgnoreLayerCollision(9, 10);
-
+		baseChar = GetComponent<BaseCharacter> ();
 		state = State.Patrol;
 		target = initialCheckpoint;
-		health = 100;
 		lostrigger = GetComponentInChildren<LosTrigger>();
 		waypoint = transform.FindChild("EnemyWaypoint");
 		targetLastPosition = Vector3.zero;
@@ -218,7 +213,7 @@ public class EnemyAI : MonoBehaviour {
 		if (Time.time > nextAttack) {
 			
 			SendDamage();
-			nextAttack = Time.time + attackSpeed;
+			nextAttack = Time.time + baseChar.attackSpeed;
 		}
 	}
 	
@@ -237,9 +232,8 @@ public class EnemyAI : MonoBehaviour {
 		if (target.tag == "Player"){
 			
 			AttackAnimation();
-	//		target.gameObject.SendMessage("ReceiveDamage", damage);
-		}
-		
+			target.gameObject.SendMessage("ReceiveDamage", baseChar.damage);
+		}		
 	}
 	
 	void EnemyMovement(){
@@ -247,10 +241,10 @@ public class EnemyAI : MonoBehaviour {
 		float moveSpeed;
 
 		if (state == State.Alerted){
-			moveSpeed = alertedSpeed;
+			moveSpeed = baseChar.movementSpeed * 2;
 		}
 		else {
-			moveSpeed = patrolSpeed;
+			moveSpeed = baseChar.movementSpeed;
 		}
 		if (IsGrounded()){
 			if(PathClear()){

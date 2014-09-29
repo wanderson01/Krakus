@@ -3,13 +3,13 @@ using System.Collections;
 
 public class AnimationScript : MonoBehaviour {
 
-	private MovementController controller;
+	private PlayerController controller;
 	private Animator _animator;
 
 	// Use this for initialization
 	void Start () {
 
-		controller = transform.parent.GetComponent<MovementController> ();
+		controller = transform.parent.GetComponent<PlayerController> ();
 		_animator = GetComponent<Animator> ();
 	}
 	

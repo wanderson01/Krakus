@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MovementController : MonoBehaviour {
+public class PlayerController : MonoBehaviour {
 	
-	
-	public float speed = 2.5f;
+	private float speed;
 	public float jumpPower = 23f;
 	public float gravity = 50.0f;
 	public float minVerticalPower = -30;
@@ -22,6 +21,7 @@ public class MovementController : MonoBehaviour {
 	
 	void Start ()
 	{
+		speed = GetComponent<BaseCharacter> ().movementSpeed;
 		tempPosition = transform.position.x;
 		controller  = GetComponent<CharacterController>();
 		raycast = GetComponentInChildren<Raycast> ();
@@ -221,7 +221,7 @@ public class MovementController : MonoBehaviour {
 		moveDirection *= 0;
 		_animator.SetFloat("walk", 0);
 	}
-	
+
 	void StepDownPlatform(){
 		
 		if (raycast.IsGrounded ()) {

@@ -3,9 +3,10 @@ using System.Collections;
 
 public class EnemyDeath : MonoBehaviour {
 	
-/*	void OnTriggerEnter(Collider collision){
-		if (collision.gameObject.tag == "Bullet"){
-			Destroy(gameObject);
+	void OnTriggerEnter(Collider col){
+		
+		if (col.name == "Sword" && col.transform.parent.tag == "Player"){
+			//Destroy (gameObject);
 		}
-	}*/
+	}
 }

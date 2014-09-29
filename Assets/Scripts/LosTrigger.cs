@@ -7,18 +7,18 @@ public class LosTrigger : MonoBehaviour {
 	public bool triggered;
 	public bool onSightArea;
 
-	void OnTriggerStay (Collider collision) {
+	void OnTriggerStay (Collider col) {
 		
-		if(collision.gameObject.tag == "Player"){
-			losTarget = collision.gameObject;
+		if(col.gameObject.tag == "Player"){
+			losTarget = col.gameObject;
 			onSightArea = true;
 			triggered = true;
 		}
 	}
 
-	void OnTriggerExit (Collider collision){
+	void OnTriggerExit (Collider col){
 
-		if (collision.gameObject.tag == "Player") {
+		if (col.gameObject.tag == "Player") {
 			onSightArea = false;	
 		}
 	}

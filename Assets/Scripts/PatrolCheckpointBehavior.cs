@@ -33,7 +33,7 @@ public class PatrolCheckpointBehavior : MonoBehaviour {
 	void OnTriggerEnter(Collider col){
 		
 		if (col.gameObject == patrollingObj && enemy.state == EnemyAI.State.Patrol  && triggered == false){
-			print ("collider");
+
 			if (enemy.target == this.gameObject){
 				enemy.target = otherCheckpoint;
 			}
