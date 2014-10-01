@@ -1,14 +1,12 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\EnemyAI.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\PlayerController.cs">
     <Files>
-      <File FileName="Assets\Scripts\PlayerController.cs" Line="213" Column="3" />
-      <File FileName="Assets\Scripts\BaseCharacter.cs" Line="17" Column="18" />
-      <File FileName="Assets\Scripts\FallingObject.cs" Line="19" Column="41" />
-      <File FileName="Assets\Scripts\FallingObjectTrigger.cs" Line="16" Column="68" />
-      <File FileName="Assets\Scripts\Magic.cs" Line="16" Column="1" />
-      <File FileName="Assets\Scripts\MagicProjectile.cs" Line="24" Column="60" />
-      <File FileName="Assets\Scripts\EnemyAI.cs" Line="227" Column="4" />
+      <File FileName="Assets\Scripts\Elevator.cs" Line="12" Column="26" />
+      <File FileName="Assets\Scripts\PlayerController.cs" Line="223" Column="36" />
+      <File FileName="Assets\Scripts\ElevatorDetection.cs" Line="28" Column="5" />
+      <File FileName="Assets\Scripts\LosTrigger.cs" Line="13" Column="31" />
+      <File FileName="Assets\Scripts\Raycast.cs" Line="10" Column="49" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -3,22 +3,35 @@ using System.Collections;
 
 public class Magic : MonoBehaviour {
 
-	public GameObject magicObj;
+	public GameObject fireObj;
+	public GameObject iceObj;
 	private PlayerController.ActionState playerState;
+	private BaseCharacter baseChar;
 
 	void Start () {
+
 		playerState = transform.parent.parent.GetComponent<PlayerController> ().state;
-	}
-	
-	void Update () {
-		CastMagic ();
+		baseChar = transform.parent.parent.GetComponent<BaseCharacter> ();
 	}
 
-	void CastMagic(){
+	public void CastMagic(){
 
-		if (Input.GetButtonDown("Fire1")){
+		if (baseChar.damageEffect != BaseCharacter.DamageEffect.Physical){
+			GameObject magicProjectile = Instantiate (MagicEffect(), transform.position, transform.rotation) as GameObject;
+		}
+	}
 
-			GameObject magicBall = Instantiate (magicObj, transform.position, transform.rotation) as GameObject;
+	GameObject MagicEffect(){
+		
+		if (baseChar.damageEffect == BaseCharacter.DamageEffect.Fire){
+			return fireObj;
+		}
+		else if (baseChar.damageEffect == BaseCharacter.DamageEffect.Ice){
+			return iceObj;
+		}
+		else {
+			Debug.Log ("Error: No magic effect selected.");
+			return null;
 		}
 	}
 }

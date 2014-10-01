@@ -8,12 +8,11 @@ public class Raycast : MonoBehaviour {
 	public float walljumpRaycastLength = 0.9f;
 	private RaycastHit walljumpRaycastHit;
 	public Vector3 raycastPoint{ get; private set;}
-	public bool grounded;
 	public GameObject groundedObject;
 	private int layerMask = 1 << 8;
 	
 	void Update () {
-
+		groundedObject = IsGrounded ();
 		IsGrounded ();
 		CanWallJump ();
 	}

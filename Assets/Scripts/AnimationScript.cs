@@ -6,16 +6,14 @@ public class AnimationScript : MonoBehaviour {
 	private PlayerController controller;
 	private Animator _animator;
 
-	// Use this for initialization
 	void Start () {
 
 		controller = transform.parent.GetComponent<PlayerController> ();
 		_animator = GetComponent<Animator> ();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	void CastMagic(){
+		GetComponentInChildren<Magic>().CastMagic();
 	}
 
 	void AttackCombo1(){

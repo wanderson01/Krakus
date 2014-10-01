@@ -57,6 +57,8 @@
      <Compile Include="Assets\Scripts\Camera Scripts\CameraFollow.cs" />
      <Compile Include="Assets\Scripts\CubeTest.cs" />
      <Compile Include="Assets\Scripts\Death.cs" />
+     <Compile Include="Assets\Scripts\Elevator.cs" />
+     <Compile Include="Assets\Scripts\ElevatorDetection.cs" />
      <Compile Include="Assets\Scripts\EnemyAI.cs" />
      <Compile Include="Assets\Scripts\EnemyDeath.cs" />
      <Compile Include="Assets\Scripts\FallingObject.cs" />
@@ -72,6 +74,7 @@
      <Compile Include="Assets\Scripts\PatrolCheckpointBehavior.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
      <Compile Include="Assets\Scripts\Raycast.cs" />
+     <Compile Include="Assets\Scripts\Sword.cs" />
      <Compile Include="Assets\Scripts\Target_Behavior.cs" />
      <Compile Include="Assets\Scripts\UnitRaycast.cs" />
      <None Include="Assets\Standard Assets\Projectors\Guidelines.txt" />

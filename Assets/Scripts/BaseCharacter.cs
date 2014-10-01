@@ -8,7 +8,7 @@ public class BaseCharacter : MonoBehaviour {
 	public float attackSpeed;
 	public float movementSpeed;
 	public int damage;
-	public string damageEffect;
+	public DamageEffect damageEffect;
 
 	void Start () {
 		currentHealth = maxHealth;
@@ -16,6 +16,13 @@ public class BaseCharacter : MonoBehaviour {
 
 	void Update () {
 		CheckHealth ();
+	}
+
+	public enum DamageEffect{
+
+		Physical,
+		Fire,
+		Ice
 	}
 
 	public void ReceiveDamage(int damage){

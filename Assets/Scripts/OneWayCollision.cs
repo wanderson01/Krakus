@@ -19,10 +19,13 @@ public class OneWayCollision : MonoBehaviour {
 	}
 	
 	void OneWayPlatformBehavior(Collider col){
-		
+
 		if (BehaviorActive){
 			if (col.tag == "Player"){
-				if (col.transform.position.y > this.transform.position.y){
+
+				float playerHeight = col.transform.position.y - col.GetComponent<CharacterController> ().bounds.extents.y;
+
+				if (playerHeight > this.transform.position.y){
 					Physics.IgnoreCollision(col, transform.parent.collider, false);
 				}
 				else {
@@ -31,8 +34,13 @@ public class OneWayCollision : MonoBehaviour {
 			}
 		}
 		else {
-			if (col.transform.position.y < 0){
-				BehaviorActive = true;
+			if (col.tag == "Player"){
+
+				float playerHeight = col.transform.position.y - col.GetComponent<CharacterController> ().bounds.extents.y;
+
+				if (col.transform.position.y > playerHeight){
+					BehaviorActive = true;
+				}
 			}
 		}
 	}

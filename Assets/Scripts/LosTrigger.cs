@@ -19,7 +19,7 @@ public class LosTrigger : MonoBehaviour {
 	void OnTriggerExit (Collider col){
 
 		if (col.gameObject.tag == "Player") {
-			onSightArea = false;	
+			onSightArea = false;
 		}
 	}
 }

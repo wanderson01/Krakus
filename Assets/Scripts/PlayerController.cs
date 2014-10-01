@@ -4,8 +4,10 @@ using System.Collections;
 public class PlayerController : MonoBehaviour {
 	
 	private float speed;
-	public float jumpPower = 23f;
-	public float gravity = 50.0f;
+	public float jumpForce = 28f;
+	public float gravityForce = 60.0f;
+	private float gravity;
+	public bool applyGravity = true;
 	public float minVerticalPower = -30;
 	public ActionState state;
 	public int attackCombo = 0;
@@ -18,7 +20,9 @@ public class PlayerController : MonoBehaviour {
 	private Raycast raycast;
 	public bool attacking = false;
 	public int wjCounter;
-	
+	private Transform movingPlatform;
+	public float onMovingPlatformCheckInterval = 0.2f;
+
 	void Start ()
 	{
 		speed = GetComponent<BaseCharacter> ().movementSpeed;
@@ -40,10 +44,22 @@ public class PlayerController : MonoBehaviour {
 	
 	void Update() {
 
+		ApplyGravity ();
 		Orientation();
 		Attack ();
 		Move ();
-		StepDownPlatform ();
+		StayOnMovingPlatform ();
+		StepDownOneWayPlatform ();
+	}
+
+	void ApplyGravity(){
+
+		if (applyGravity) {
+			gravity = gravityForce;
+		}
+		else {
+			gravity = 0;
+		}
 	}
 	
 	void Move(){
@@ -59,7 +75,7 @@ public class PlayerController : MonoBehaviour {
 			if (Input.GetButtonDown ("Jump") && !Input.GetKey(KeyCode.S)){
 				
 				_animator.SetBool("jump", true);
-				verticalPower = jumpPower;
+				verticalPower = jumpForce;
 				state = ActionState.Jump;
 			}
 		}
@@ -137,7 +153,7 @@ public class PlayerController : MonoBehaviour {
 				}
 				wjCounter += 1;
 				print ("Vert Antes " + verticalPower);
-				verticalPower = jumpPower; //+ 3 * wjCounter;
+				verticalPower = jumpForce; //+ 3 * wjCounter;
 
 				print ("Vert Depois " + verticalPower);
 				moveDirection = transform.TransformDirection(-Vector3.right.x + 0.2f, 0, 0);
@@ -160,7 +176,7 @@ public class PlayerController : MonoBehaviour {
 	float DistanceFromObject (Vector2 ObjectPosition){
 		
 		float distance = Vector2.Distance (ObjectPosition, transform.position);
-		//		print (distance);
+		//print (distance);
 		return distance;
 	}
 	
@@ -182,7 +198,7 @@ public class PlayerController : MonoBehaviour {
 				break;
 				
 			case ActionState.AttackJump:
-				AttackJump();
+			//	AttackJump();
 				break;
 				
 			case ActionState.WallJump:
@@ -222,7 +238,30 @@ public class PlayerController : MonoBehaviour {
 		_animator.SetFloat("walk", 0);
 	}
 
-	void StepDownPlatform(){
+	void StayOnMovingPlatform(){
+
+		if (movingPlatform && onMovingPlatformCheckInterval > 0){
+			transform.parent = movingPlatform;
+		}
+		onMovingPlatformCheckInterval -= Time.deltaTime;
+
+		if (onMovingPlatformCheckInterval <= 0){
+			movingPlatform = null;
+			transform.parent = null;
+		}
+	}
+
+	void OnControllerColliderHit(ControllerColliderHit hit){
+
+		print (hit.transform.name);
+
+		if (hit.transform.name == "Elevator"){
+			movingPlatform = hit.transform;
+			onMovingPlatformCheckInterval = 0.2f;
+		}
+	}
+
+	void StepDownOneWayPlatform(){
 		
 		if (raycast.IsGrounded ()) {
 			if (raycast.IsGrounded().collider.name == "Platform_OneWay"){

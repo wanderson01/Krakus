@@ -7,19 +7,19 @@ public class MagicProjectile : MonoBehaviour {
 	public int damage;
 
 	void Start(){
-		Destroy (this.gameObject, 4);
+		Destroy (this.gameObject, 3);
 	}
 
 	void FixedUpdate(){
-		rigidbody.AddForce (transform.right * movementSpeed, ForceMode.VelocityChange);
+		rigidbody.AddForce (transform.right * movementSpeed, ForceMode.Impulse);
 	}
 
 	void OnTriggerEnter(Collider col){
 
-		if (col.gameObject.tag == "Map"){
+		if (col.tag == "Map"){
 			Destroy(this.gameObject);
 		}
-		else if (col.gameObject.tag == "Enemy"){
+		else if (col.tag == "Enemy"){
 			
 			col.GetComponent<BaseCharacter>().ReceiveDamage(damage);
 			Destroy(this.gameObject);
