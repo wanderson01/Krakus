@@ -1,12 +1,10 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\PlayerController.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\SwitchBehavior.cs">
     <Files>
-      <File FileName="Assets\Scripts\Elevator.cs" Line="12" Column="26" />
-      <File FileName="Assets\Scripts\PlayerController.cs" Line="223" Column="36" />
-      <File FileName="Assets\Scripts\ElevatorDetection.cs" Line="28" Column="5" />
-      <File FileName="Assets\Scripts\LosTrigger.cs" Line="13" Column="31" />
-      <File FileName="Assets\Scripts\Raycast.cs" Line="10" Column="49" />
+      <File FileName="Assets\Scripts\PlayerController.cs" Line="168" Column="47" />
+      <File FileName="Assets\Scripts\MovingPlatform.cs" Line="11" Column="33" />
+      <File FileName="Assets\SwitchBehavior.cs" Line="37" Column="4" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

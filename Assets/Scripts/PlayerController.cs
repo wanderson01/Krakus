@@ -255,11 +255,31 @@ public class PlayerController : MonoBehaviour {
 
 		print (hit.transform.name);
 
-		if (hit.transform.name == "Elevator"){
+		if (hit.transform.name == "Moving Platform"){
 			movingPlatform = hit.transform;
 			onMovingPlatformCheckInterval = 0.2f;
 		}
+
+	//	UseObject (hit);
 	}
+
+	/*
+	void UseObject(ControllerColliderHit hit){
+
+		if (hit.collider.tag == "Usable"){
+			print ("Usable");
+
+			if (Input.GetButtonDown("Use")){
+				print ("Use Usable");
+			//	bool switchOn = hit.gameObject.GetComponent<SwitchBehavior>().switchOn;
+
+				if (hit.gameObject.GetComponent<SwitchBehavior>().switchOn == true) hit.gameObject.GetComponent<SwitchBehavior>().switchOn = false;
+				
+				else hit.gameObject.GetComponent<SwitchBehavior>().switchOn = true;
+			}
+		}
+	}
+*/
 
 	void StepDownOneWayPlatform(){
 		
