@@ -21,7 +21,7 @@ public class MagicProjectile : MonoBehaviour {
 		}
 		else if (col.tag == "Enemy"){
 			
-			col.GetComponent<BaseCharacter>().ReceiveDamage(damage);
+			col.GetComponent<BaseStats>().ReceiveDamage(damage);
 			Destroy(this.gameObject);
 		}
 	}

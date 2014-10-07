@@ -9,7 +9,7 @@ public class Sword : MonoBehaviour {
 
 		if (col.tag == "Enemy"){
 			print (col);
-			col.GetComponent<BaseCharacter>().ReceiveDamage(damage);
+			col.GetComponent<BaseStats>().ReceiveDamage(damage);
 		}
 	}
 }

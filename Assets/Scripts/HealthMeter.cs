@@ -4,13 +4,17 @@ using System.Collections;
 public class HealthMeter : MonoBehaviour {
 
 	public GameObject player;
-	public int playerHealth;
-	public int lastHealth;
-
+	public Sprite[] health;
+	private int playerHealth;
+	private int lastHealth;
+	private int maxHealth;
+	private SpriteRenderer spriteRenderer;
 
 	void Start () {
 
-		lastHealth = player.GetComponent<BaseCharacter> ().maxHealth;
+		maxHealth = player.GetComponent<BaseStats> ().maxHealth;
+		lastHealth = player.GetComponent<BaseStats> ().maxHealth;
+		spriteRenderer = GetComponent<SpriteRenderer> ();
 	}
 	
 	void Update () {
@@ -20,7 +24,7 @@ public class HealthMeter : MonoBehaviour {
 
 	void CheckHealthChange(){
 
-		playerHealth = player.GetComponent<BaseCharacter> ().currentHealth;
+		playerHealth = player.GetComponent<BaseStats> ().currentHealth;
 
 		if (playerHealth != lastHealth){
 
@@ -31,43 +35,23 @@ public class HealthMeter : MonoBehaviour {
 
 	void UpdateHealthMeter(){
 
-		if (playerHealth == 5){
-			foreach(Transform child in transform){
-				child.GetComponent<GUITexture>().enabled = true;
-			}
+		if (playerHealth == maxHealth){
+			spriteRenderer.sprite = health[0];
 		}
-		else if (playerHealth == 4){
-			transform.FindChild("Head").GetComponent<GUITexture>().enabled = false;
-			transform.FindChild("Arm Left").GetComponent<GUITexture>().enabled = true;
-			transform.FindChild("Arm Right").GetComponent<GUITexture>().enabled = true;
-			transform.FindChild("Chest Bottom").GetComponent<GUITexture>().enabled = true;
-			transform.FindChild("Chest Top").GetComponent<GUITexture>().enabled = true;
+		else if (playerHealth == maxHealth - 1){
+			spriteRenderer.sprite = health[1];
 		}
-		else if (playerHealth == 3){
-			transform.FindChild("Head").GetComponent<GUITexture>().enabled = false;
-			transform.FindChild("Arm Left").GetComponent<GUITexture>().enabled = false;
-			transform.FindChild("Arm Right").GetComponent<GUITexture>().enabled = true;
-			transform.FindChild("Chest Bottom").GetComponent<GUITexture>().enabled = true;
-			transform.FindChild("Chest Top").GetComponent<GUITexture>().enabled = true;
+		else if (playerHealth == maxHealth - 2){
+			spriteRenderer.sprite = health[2];
 		}
-		else if (playerHealth == 2){
-			transform.FindChild("Head").GetComponent<GUITexture>().enabled = false;
-			transform.FindChild("Arm Left").GetComponent<GUITexture>().enabled = false;
-			transform.FindChild("Arm Right").GetComponent<GUITexture>().enabled = true;
-			transform.FindChild("Chest Bottom").GetComponent<GUITexture>().enabled = true;
-			transform.FindChild("Chest Top").GetComponent<GUITexture>().enabled = false;
+		else if (playerHealth == maxHealth - 3){
+			spriteRenderer.sprite = health[3];
 		}
-		else if (playerHealth == 1){
-			transform.FindChild("Head").GetComponent<GUITexture>().enabled = false;
-			transform.FindChild("Arm Left").GetComponent<GUITexture>().enabled = false;
-			transform.FindChild("Arm Right").GetComponent<GUITexture>().enabled = false;
-			transform.FindChild("Chest Bottom").GetComponent<GUITexture>().enabled = true;
-			transform.FindChild("Chest Top").GetComponent<GUITexture>().enabled = false;
+		else if (playerHealth == maxHealth - 4){
+			spriteRenderer.sprite = health[4];
 		}
-		else if (playerHealth <= 0){
-			foreach(Transform child in transform){
-				child.GetComponent<GUITexture>().enabled = false;
-			}
+		else if (playerHealth == maxHealth - 5){
+			spriteRenderer.sprite = health[5];
 		}
 	}
 }

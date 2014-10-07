@@ -3,29 +3,32 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 	
-	private float speed;
+
 	public float jumpForce = 28f;
 	public float gravityForce = 60.0f;
-	private float gravity;
 	public bool applyGravity = true;
 	public float minVerticalPower = -30;
 	public ActionState state;
 	public int attackCombo = 0;
-	private Vector2 moveDirection = Vector2.zero;
-	private CharacterController controller;
-	private float verticalPower = 0;
-	private Animator _animator;
 	public float tempPosition;
 	private float newTime = 0;
 	private Raycast raycast;
 	public bool attacking = false;
 	public int wjCounter;
-	private Transform movingPlatform;
 	public float onMovingPlatformCheckInterval = 0.2f;
+
+	private Transform movingPlatform;
+	private Vector2 moveDirection = Vector2.zero;
+	private CharacterController controller;
+	private float verticalPower = 0;
+	private Animator _animator;
+	private float gravity;
+	private float speed;
 
 	void Start ()
 	{
-		speed = GetComponent<BaseCharacter> ().movementSpeed;
+		MoveToStartingPosition ();
+		speed = GetComponent<BaseStats> ().movementSpeed;
 		tempPosition = transform.position.x;
 		controller  = GetComponent<CharacterController>();
 		raycast = GetComponentInChildren<Raycast> ();
@@ -60,6 +63,11 @@ public class PlayerController : MonoBehaviour {
 		else {
 			gravity = 0;
 		}
+	}
+
+	void MoveToStartingPosition(){
+
+		transform.position = GameData.SpawnPoint;
 	}
 	
 	void Move(){
@@ -238,49 +246,38 @@ public class PlayerController : MonoBehaviour {
 		_animator.SetFloat("walk", 0);
 	}
 
-	void StayOnMovingPlatform(){
+	void OnControllerColliderHit(ControllerColliderHit hit){
 
+		MovingPlatform (hit);
+		Pickuploot (hit);
+		SpikeDamage (hit);
+	}
+
+	void MovingPlatform(ControllerColliderHit hit){
+
+		if (hit.transform.name == "Moving Platform" && Vector3.Angle (hit.normal, Vector3.up) < controller.slopeLimit){
+			movingPlatform = hit.transform;
+			onMovingPlatformCheckInterval = 0.2f;
+			movingPlatform.GetComponent<downwardPlatform>().hasObjectOnTop = true;
+		}
+	}
+
+	void StayOnMovingPlatform(){
+		
 		if (movingPlatform && onMovingPlatformCheckInterval > 0){
 			transform.parent = movingPlatform;
 		}
 		onMovingPlatformCheckInterval -= Time.deltaTime;
-
-		if (onMovingPlatformCheckInterval <= 0){
+		
+		if (movingPlatform && onMovingPlatformCheckInterval <= 0){
+			if (movingPlatform.parent.name == "PlatformWeightable"){
+				movingPlatform.GetComponent<downwardPlatform>().hasObjectOnTop = false;
+			}
 			movingPlatform = null;
 			transform.parent = null;
 		}
 	}
-
-	void OnControllerColliderHit(ControllerColliderHit hit){
-
-		print (hit.transform.name);
-
-		if (hit.transform.name == "Moving Platform"){
-			movingPlatform = hit.transform;
-			onMovingPlatformCheckInterval = 0.2f;
-		}
-
-	//	UseObject (hit);
-	}
-
-	/*
-	void UseObject(ControllerColliderHit hit){
-
-		if (hit.collider.tag == "Usable"){
-			print ("Usable");
-
-			if (Input.GetButtonDown("Use")){
-				print ("Use Usable");
-			//	bool switchOn = hit.gameObject.GetComponent<SwitchBehavior>().switchOn;
-
-				if (hit.gameObject.GetComponent<SwitchBehavior>().switchOn == true) hit.gameObject.GetComponent<SwitchBehavior>().switchOn = false;
-				
-				else hit.gameObject.GetComponent<SwitchBehavior>().switchOn = true;
-			}
-		}
-	}
-*/
-
+	
 	void StepDownOneWayPlatform(){
 		
 		if (raycast.IsGrounded ()) {
@@ -293,6 +290,40 @@ public class PlayerController : MonoBehaviour {
 					Physics.IgnoreCollision(this.gameObject.collider, oneWayPlatform.collider);
 				}
 			}
+		}
+	}
+
+	void Pickuploot(ControllerColliderHit hit){
+		
+		if (hit.collider.tag == "Loot") {
+			print ("loot");
+			AddLoot(hit.gameObject);
+			Destroy(hit.collider.gameObject);
+		}
+	}
+	
+	void AddLoot(GameObject loot){
+		
+		switch (loot.name){
+		case "GoldCoin":
+			GameData.AddGold(10);
+			break;
+		case "IronIngot":
+			GameData.AddIron(1);
+			break;
+		case "Stone":
+			GameData.AddStone(1);
+			break;
+		case "Grimoire":
+			GameData.AddGrimoire(1);
+			break;
+		}		
+	}
+
+	void SpikeDamage(ControllerColliderHit hit){
+		
+		if (hit.transform.name == "Spike"){
+			this.gameObject.SendMessage("ReceiveDamage", hit.collider.GetComponent<BaseStats>().damage);
 		}
 	}
 }

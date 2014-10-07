@@ -6,27 +6,27 @@ public class Magic : MonoBehaviour {
 	public GameObject fireObj;
 	public GameObject iceObj;
 	private PlayerController.ActionState playerState;
-	private BaseCharacter baseChar;
+	private BaseStats baseStats;
 
 	void Start () {
 
 		playerState = transform.parent.parent.GetComponent<PlayerController> ().state;
-		baseChar = transform.parent.parent.GetComponent<BaseCharacter> ();
+		baseStats = transform.parent.parent.GetComponent<BaseStats> ();
 	}
 
 	public void CastMagic(){
 
-		if (baseChar.damageEffect != BaseCharacter.DamageEffect.Physical){
+		if (baseStats.damageEffect != BaseStats.DamageEffect.Physical){
 			GameObject magicProjectile = Instantiate (MagicEffect(), transform.position, transform.rotation) as GameObject;
 		}
 	}
 
 	GameObject MagicEffect(){
 		
-		if (baseChar.damageEffect == BaseCharacter.DamageEffect.Fire){
+		if (baseStats.damageEffect == BaseStats.DamageEffect.Fire){
 			return fireObj;
 		}
-		else if (baseChar.damageEffect == BaseCharacter.DamageEffect.Ice){
+		else if (baseStats.damageEffect == BaseStats.DamageEffect.Ice){
 			return iceObj;
 		}
 		else {
