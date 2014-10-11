@@ -4,53 +4,60 @@ using System.Collections;
 public class Raycast : MonoBehaviour {
 	
 	public float groundedRaycastLength = 2f;
+	public float groundedRaycastOffsetY;
 	public float walljumpRaycastLength = 0.9f;
 	private RaycastHit walljumpRaycastHit;
 	public Vector3 raycastPoint{ get; private set;}
-	public bool grounded;
+	public GameObject groundedObject;
 	private int layerMask = 1 << 8;
 	
 	void Update () {
+		groundedObject = IsGrounded ();
 		IsGrounded ();
 		CanWallJump ();
-		grounded = IsGrounded();
 	}
-	
-	public bool IsGrounded(){
+
+	public GameObject IsGrounded(){
 		
-		RaycastHit raycastHit;
-		var down = -(transform.TransformDirection(Vector3.up));
+		RaycastHit hit;
+		Vector3 down = -(transform.TransformDirection(Vector3.up));
+
+		Vector3 posLeft = new Vector3 (transform.position.x - groundedRaycastOffsetY, transform.position.y);
+		Vector3 posRight = new Vector3(transform.position.x + groundedRaycastOffsetY, transform.position.y);
+
 		Debug.DrawRay(transform.position, down * groundedRaycastLength, Color.yellow);
-		
-		if (Physics.Raycast(transform.position, down, out raycastHit, groundedRaycastLength, layerMask)){
-			if(raycastHit.collider.tag == "Map"){
-				return true;
+		Debug.DrawRay(posLeft, down * groundedRaycastLength, Color.yellow);
+		Debug.DrawRay(posRight, down * groundedRaycastLength, Color.yellow);
+
+
+		if (Physics.Raycast(transform.position, down, out hit, groundedRaycastLength, layerMask)){
+			if(hit.collider.tag == "Map"){
+				return hit.collider.gameObject;
 			}
 			else {
-				return false;
+				return null;
+			}
+		}
+
+		if (Physics.Raycast(posLeft, down, out hit, groundedRaycastLength, layerMask)){
+			if(hit.collider.tag == "Map"){
+				return hit.collider.gameObject;
+			}
+			else {
+				return null;
+			}
+		}
+
+		if (Physics.Raycast(posRight, down, out hit, groundedRaycastLength, layerMask)){
+			if(hit.collider.tag == "Map"){
+				return hit.collider.gameObject;
+			}
+			else {
+				return null;
 			}
 		}
 		else {
-			return false;
-		}
-	}
-	
-	void OnPlatform(){
-		
-		var down = -(transform.TransformDirection(Vector3.up));
-		Debug.DrawRay(transform.position, down * groundedRaycastLength, Color.yellow);
-		
-		RaycastHit2D hit = Physics2D.Raycast(transform.position, down, groundedRaycastLength, layerMask);
-		if (hit){
-			if (hit.collider.name == "Platform_OneWay"){
-				//	transform.parent.GetComponent<MovementController>().OnPlatform = true;
-			}
-			else {
-				//	transform.parent.GetComponent<MovementController>().OnPlatform = false;
-			}
-		}
-		else {
-			//	transform.parent.GetComponent<MovementController>().OnPlatform = false;
+			return null;
 		}
 	}
 	
@@ -60,10 +67,14 @@ public class Raycast : MonoBehaviour {
 		Debug.DrawRay(transform.position, right * walljumpRaycastLength, Color.yellow);
 		
 		if (Physics.Raycast(transform.position, right, out walljumpRaycastHit, walljumpRaycastLength)){
-			print (walljumpRaycastHit.collider.name);
-			if(walljumpRaycastHit.collider.tag == "Map"){ 
-				raycastPoint = walljumpRaycastHit.point;
-				return true;
+			if (!IsGrounded()){
+				if(walljumpRaycastHit.collider.tag == "Map"){ 
+					raycastPoint = walljumpRaycastHit.point;
+					return true;
+				}
+				else {
+					return false;
+				}
 			}
 			else {
 				return false;
@@ -75,4 +86,4 @@ public class Raycast : MonoBehaviour {
 	}
 }
 
-	
+
