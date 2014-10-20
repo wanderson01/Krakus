@@ -4,12 +4,10 @@ using System.Collections;
 public class AnimationScript : MonoBehaviour {
 
 	private PlayerController controller;
-	private Animator _animator;
 
 	void Start () {
 
 		controller = transform.parent.GetComponent<PlayerController> ();
-		_animator = GetComponent<Animator> ();
 	}
 
 	void CastMagic(){

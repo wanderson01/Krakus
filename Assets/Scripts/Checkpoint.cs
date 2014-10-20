@@ -4,15 +4,27 @@ using System.Collections;
 public class Checkpoint : MonoBehaviour {
 
 	public int orderId;
+	public bool activated = false;
+	private Animator animator;
+
+	void Start(){
+		animator = GetComponent<Animator> ();
+	}
+
+	void Update(){
+
+		if (activated){
+			animator.SetBool("Enabled", true);
+		}
+	}
 
 	void OnTriggerEnter(Collider col){
 
 		if (col.tag == "Player") {
-			print (GameData.spawnId);
-			if (GameData.spawnId < orderId){
-				print ("ID");
-				GameData.SpawnPoint = this.transform.position;
-				GameData.spawnId = orderId;
+			activated = true;
+			if (GameData.currentGame.SpawnId < orderId){
+				GameData.currentGame.SpawnPoint = this.transform.position;
+				GameData.currentGame.SpawnId = orderId;
 			}
 		}
 	}

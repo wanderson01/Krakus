@@ -9,15 +9,15 @@ public class downwardPlatform : MonoBehaviour {
 	public Transform waypointTop;
 	public Transform waypointBottom;
 	public Vector3 currentWaypoint;
-	private float distanceTotal;
-	private float distanceToWaypoint;
+//	private float distanceTotal;
+//	private float distanceToWaypoint;
 	public float movementSpeed;
 	private Vector3 moveDirection;
 
 	void Start () {
 		
 		currentWaypoint = waypointTop.position;
-		distanceTotal = Vector3.Distance(waypointTop.position, waypointBottom.position);
+//		distanceTotal = Vector3.Distance(waypointTop.position, waypointBottom.position);
 		movementSpeed = maxSpeed;
 	}
 	
@@ -27,7 +27,7 @@ public class downwardPlatform : MonoBehaviour {
 	
 	void ChangeWaypointWhenPlayerOnTop(){
 		
-		distanceToWaypoint = Vector3.Distance (transform.position, currentWaypoint);
+//		distanceToWaypoint = Vector3.Distance (transform.position, currentWaypoint);
 		
 		if (hasObjectOnTop){
 			currentWaypoint = waypointBottom.position;

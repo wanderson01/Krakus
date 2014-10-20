@@ -5,6 +5,7 @@ public class MagicProjectile : MonoBehaviour {
 
 	public float movementSpeed;
 	public int damage;
+	public bool canHitPlayer;
 
 	void Start(){
 		Destroy (this.gameObject, 3);
@@ -23,6 +24,9 @@ public class MagicProjectile : MonoBehaviour {
 			
 			col.GetComponent<BaseStats>().ReceiveDamage(damage);
 			Destroy(this.gameObject);
+		}
+		else if (canHitPlayer && col.tag == "Player"){
+			col.GetComponent<BaseStats>().ReceiveDamage(damage);
 		}
 	}
 }

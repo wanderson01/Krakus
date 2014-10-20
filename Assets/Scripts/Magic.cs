@@ -5,19 +5,17 @@ public class Magic : MonoBehaviour {
 
 	public GameObject fireObj;
 	public GameObject iceObj;
-	private PlayerController.ActionState playerState;
 	private BaseStats baseStats;
 
 	void Start () {
-
-		playerState = transform.parent.parent.GetComponent<PlayerController> ().state;
+		
 		baseStats = transform.parent.parent.GetComponent<BaseStats> ();
 	}
 
 	public void CastMagic(){
 
 		if (baseStats.damageEffect != BaseStats.DamageEffect.Physical){
-			GameObject magicProjectile = Instantiate (MagicEffect(), transform.position, transform.rotation) as GameObject;
+			Instantiate (MagicEffect(), transform.position, transform.rotation);
 		}
 	}
 

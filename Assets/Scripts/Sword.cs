@@ -8,7 +8,6 @@ public class Sword : MonoBehaviour {
 	void OnTriggerEnter(Collider col){
 
 		if (col.tag == "Enemy"){
-			print (col);
 			col.GetComponent<BaseStats>().ReceiveDamage(damage);
 		}
 	}

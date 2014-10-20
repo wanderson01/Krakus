@@ -1,0 +1,297 @@
+fileFormatVersion: 2
+guid: f2e90c2b02863ab4aaca031e9458d190
+TextureImporter:
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: 0
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Dragao_0
+      rect:
+        serializedVersion: 2
+        x: 124
+        y: 1076
+        width: 423
+        height: 324
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: Dragao_1
+      rect:
+        serializedVersion: 2
+        x: 649
+        y: 1076
+        width: 423
+        height: 324
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: Dragao_2
+      rect:
+        serializedVersion: 2
+        x: 1157
+        y: 1076
+        width: 423
+        height: 324
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: Dragao_3
+      rect:
+        serializedVersion: 2
+        x: 1646
+        y: 1076
+        width: 404
+        height: 324
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: Dragao_4
+      rect:
+        serializedVersion: 2
+        x: 124
+        y: 723
+        width: 431
+        height: 339
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: Dragao_5
+      rect:
+        serializedVersion: 2
+        x: 673
+        y: 723
+        width: 431
+        height: 339
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: Dragao_6
+      rect:
+        serializedVersion: 2
+        x: 1143
+        y: 723
+        width: 431
+        height: 339
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: Dragao_7
+      rect:
+        serializedVersion: 2
+        x: 1619
+        y: 723
+        width: 431
+        height: 339
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: Dragao_8
+      rect:
+        serializedVersion: 2
+        x: 122
+        y: 393
+        width: 415
+        height: 300
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: Dragao_9
+      rect:
+        serializedVersion: 2
+        x: 717
+        y: 393
+        width: 415
+        height: 300
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: Dragao_10
+      rect:
+        serializedVersion: 2
+        x: 1159
+        y: 393
+        width: 415
+        height: 300
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: Dragao_11
+      rect:
+        serializedVersion: 2
+        x: 1635
+        y: 393
+        width: 415
+        height: 300
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: Dragao_12
+      rect:
+        serializedVersion: 2
+        x: 1431
+        y: 318
+        width: 12
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: Dragao_13
+      rect:
+        serializedVersion: 2
+        x: 286
+        y: 244
+        width: 22
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: Dragao_14
+      rect:
+        serializedVersion: 2
+        x: 1423
+        y: 270
+        width: 8
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: Dragao_15
+      rect:
+        serializedVersion: 2
+        x: 723
+        y: 260
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: Dragao_16
+      rect:
+        serializedVersion: 2
+        x: 737
+        y: 238
+        width: 20
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: Dragao_17
+      rect:
+        serializedVersion: 2
+        x: 274
+        y: 244
+        width: 8
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: Dragao_18
+      rect:
+        serializedVersion: 2
+        x: 721
+        y: 236
+        width: 8
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: Dragao_19
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 208
+        width: 16
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: Dragao_20
+      rect:
+        serializedVersion: 2
+        x: 1315
+        y: 224
+        width: 14
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: Dragao_21
+      rect:
+        serializedVersion: 2
+        x: 266
+        y: 200
+        width: 4
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: Dragao_22
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 170
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: Dragao_23
+      rect:
+        serializedVersion: 2
+        x: 254
+        y: 166
+        width: 16
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: Dragao_24
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 112
+        width: 36
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: Dragao_25
+      rect:
+        serializedVersion: 2
+        x: 236
+        y: 108
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: Dragao_26
+      rect:
+        serializedVersion: 2
+        x: 242
+        y: 108
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: Dragao_27
+      rect:
+        serializedVersion: 2
+        x: 1221
+        y: 194
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+  spritePackingTag: 
+  userData: 
