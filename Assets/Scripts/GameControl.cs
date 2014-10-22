@@ -10,18 +10,18 @@ public class GameControl : MonoBehaviour {
 	}
 
 	public static void StartGame(){
-
-		if (File.Exists(Application.persistentDataPath + "/savedGames.gd")){
+		if (File.Exists(GameData.saveFileName)){
 			SaveLoadGameData.Load ();
-		}
-		else {
+		} else {
 			StartNewGame();
 		}
 	}
 
 	public static void StartNewGame(){
-
-		GameData.currentGame.SpawnPoint = GameObject.FindWithTag ("Start").transform.position;
+		GameObject startPos = GameObject.FindWithTag ("Start");
+		if (startPos != null) {
+			GameData.currentGame.SpawnPoint = startPos.transform.position;
+		}
 	}
 
 	public static void GameOver(){

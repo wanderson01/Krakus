@@ -7,13 +7,15 @@ using System.IO;
 public static class SaveLoadGameData {
 	
 //	public static List<GameData> savedGames = new List<GameData>();
+	public static string saveFileName = GameData.saveFileName;
 
 	public static void Save(){
 
 //		savedGames.Add (GameData.currentGame);
 
 		BinaryFormatter bf = new BinaryFormatter ();
-		FileStream file = File.Create(Application.persistentDataPath + "/savedGames.gd");
+		FileStream file = File.Create(saveFileName);
+		Debug.Log("Salvando em: " + saveFileName);
 
 		GameData.currentGame.allObjectsId = GetAllObjectsId ();
 		bf.Serialize (file, GameData.currentGame);
@@ -22,12 +24,13 @@ public static class SaveLoadGameData {
 
 	public static void Load(){
 
-		if (File.Exists(Application.persistentDataPath + "/savedGames.gd")){
+		if (File.Exists(saveFileName)){
 			
 			BinaryFormatter bf = new BinaryFormatter ();
-			FileStream file = File.Open(Application.persistentDataPath + "/savedGames.gd", FileMode.Open);
+			FileStream file = File.Open(saveFileName, FileMode.Open);
 
 			GameData.currentGame = (GameData) bf.Deserialize(file);
+			Debug.Log("Carregando de: " + saveFileName);
 
 			foreach(GameObject obj in GetAllObjects()){
 
@@ -53,15 +56,12 @@ public static class SaveLoadGameData {
 	}
 
 	public static void Delete(){
-
-		if (File.Exists(Application.persistentDataPath + "/savedGames.gd")){
-
-			File.Delete(Application.persistentDataPath + "/savedGames.gd");
+		if (File.Exists(saveFileName)) {
+			File.Delete(saveFileName);
 		}
 	}
 
 	public static IList<int> GetAllObjectsId(){
-		
 		GameObject[] allLoots = GameObject.FindGameObjectsWithTag("Loot");
 		GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
 		GameObject[] allBreakable = GameObject.FindGameObjectsWithTag("Breakable");

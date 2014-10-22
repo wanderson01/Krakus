@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 [System.Serializable]
 public class GameData{
+	public static string saveFileName = Application.persistentDataPath + "/savedGames.gd";
 
 	public static GameData currentGame = new GameData ();
 
