@@ -4,6 +4,7 @@ using System.Collections;
 public class FallingObject : MonoBehaviour {
 
 	public int damage;
+	public BaseStats.DamageEffect effect = BaseStats.DamageEffect.Physical;
 	public int fallingSpeed = 1;
 
 	void FixedUpdate(){
@@ -20,7 +21,7 @@ public class FallingObject : MonoBehaviour {
 		}
 		else if (col.gameObject.tag == "Player"){
 
-			col.gameObject.SendMessage("ReceiveDamage", damage);
+						col.gameObject.SendMessage("ReceiveDamage", new DamageType(damage, effect));
 			Destroy(transform.parent.gameObject);
 		}
 	}

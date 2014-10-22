@@ -9,7 +9,7 @@ public class GUILoot : MonoBehaviour {
 		UpdateLootCount ();
 	}
 
-	void UpdateLootCount(){
+	void UpdateLootCount() {
 		guiText.text = "Gold: " + GameData.currentGame.Gold + " Iron: " + GameData.currentGame.Iron + " Stone: " + GameData.currentGame.Stone;
 		guiText.fontSize = Mathf.Min (Screen.height, Screen.width) / textSize;
 	}

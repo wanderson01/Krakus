@@ -6,10 +6,10 @@ public class Magic : MonoBehaviour {
 	public GameObject fireObj;
 	public GameObject iceObj;
 	private BaseStats baseStats;
+	public GameObject wielder;
 
 	void Start () {
-		
-		baseStats = transform.parent.parent.GetComponent<BaseStats> ();
+		baseStats = wielder.GetComponent<BaseStats> ();
 	}
 
 	public void CastMagic(){
@@ -19,15 +19,12 @@ public class Magic : MonoBehaviour {
 		}
 	}
 
-	GameObject MagicEffect(){
-		
-		if (baseStats.damageEffect == BaseStats.DamageEffect.Fire){
+	GameObject MagicEffect() {
+		if (baseStats.damageEffect == BaseStats.DamageEffect.Fire) {
 			return fireObj;
-		}
-		else if (baseStats.damageEffect == BaseStats.DamageEffect.Ice){
+		} else if (baseStats.damageEffect == BaseStats.DamageEffect.Ice) {
 			return iceObj;
-		}
-		else {
+		} else {
 			Debug.Log ("Error: No magic effect selected.");
 			return null;
 		}

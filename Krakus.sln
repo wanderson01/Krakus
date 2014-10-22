@@ -1,13 +1,13 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2008
 
-Project("{F85904D6-091E-B84C-BDD4-CFA5BB39AF96}") = "Krakus", "Assembly-CSharp-firstpass.csproj", "{F1E81C45-6B25-BD7F-7D86-06038FD5F6E9}"
+Project("{A08F339F-C5CE-1036-F80C-1DD3B5CD365A}") = "krakus", "Assembly-CSharp-firstpass.csproj", "{B504DF75-5C6D-0B98-EF18-307644482F9F}"
 EndProject
-Project("{F85904D6-091E-B84C-BDD4-CFA5BB39AF96}") = "Krakus", "Assembly-CSharp.csproj", "{823DF9BE-A6D0-F799-D816-D79770F586F2}"
+Project("{A08F339F-C5CE-1036-F80C-1DD3B5CD365A}") = "krakus", "Assembly-CSharp.csproj", "{44FE3203-57A9-2A58-CCD4-F7D7A041DDCC}"
 EndProject
-Project("{F85904D6-091E-B84C-BDD4-CFA5BB39AF96}") = "Krakus", "Assembly-UnityScript-firstpass.unityproj", "{00729695-1EDE-F629-B472-CC13C6B09215}"
+Project("{A08F339F-C5CE-1036-F80C-1DD3B5CD365A}") = "krakus", "Assembly-UnityScript-firstpass.unityproj", "{6A92E716-F2F4-CC0D-5F07-46E8B9BFA5E9}"
 EndProject
-Project("{F85904D6-091E-B84C-BDD4-CFA5BB39AF96}") = "Krakus", "Assembly-UnityScript.unityproj", "{81AC587D-5F20-00AA-4DD2-B77754EE1367}"
+Project("{A08F339F-C5CE-1036-F80C-1DD3B5CD365A}") = "krakus", "Assembly-UnityScript.unityproj", "{4F123713-7B2F-A56B-6B10-073ADAD4C3B3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,26 +15,27 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F1E81C45-6B25-BD7F-7D86-06038FD5F6E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F1E81C45-6B25-BD7F-7D86-06038FD5F6E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F1E81C45-6B25-BD7F-7D86-06038FD5F6E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F1E81C45-6B25-BD7F-7D86-06038FD5F6E9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{823DF9BE-A6D0-F799-D816-D79770F586F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{823DF9BE-A6D0-F799-D816-D79770F586F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{823DF9BE-A6D0-F799-D816-D79770F586F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{823DF9BE-A6D0-F799-D816-D79770F586F2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{00729695-1EDE-F629-B472-CC13C6B09215}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{00729695-1EDE-F629-B472-CC13C6B09215}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{00729695-1EDE-F629-B472-CC13C6B09215}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{00729695-1EDE-F629-B472-CC13C6B09215}.Release|Any CPU.Build.0 = Release|Any CPU
-		{81AC587D-5F20-00AA-4DD2-B77754EE1367}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{81AC587D-5F20-00AA-4DD2-B77754EE1367}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{81AC587D-5F20-00AA-4DD2-B77754EE1367}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{81AC587D-5F20-00AA-4DD2-B77754EE1367}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B504DF75-5C6D-0B98-EF18-307644482F9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B504DF75-5C6D-0B98-EF18-307644482F9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B504DF75-5C6D-0B98-EF18-307644482F9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B504DF75-5C6D-0B98-EF18-307644482F9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44FE3203-57A9-2A58-CCD4-F7D7A041DDCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44FE3203-57A9-2A58-CCD4-F7D7A041DDCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44FE3203-57A9-2A58-CCD4-F7D7A041DDCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44FE3203-57A9-2A58-CCD4-F7D7A041DDCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A92E716-F2F4-CC0D-5F07-46E8B9BFA5E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A92E716-F2F4-CC0D-5F07-46E8B9BFA5E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A92E716-F2F4-CC0D-5F07-46E8B9BFA5E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A92E716-F2F4-CC0D-5F07-46E8B9BFA5E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F123713-7B2F-A56B-6B10-073ADAD4C3B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F123713-7B2F-A56B-6B10-073ADAD4C3B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F123713-7B2F-A56B-6B10-073ADAD4C3B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F123713-7B2F-A56B-6B10-073ADAD4C3B3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
+																																																																																																																																									GlobalSection(MonoDevelopProperties) = preSolution
 																																																																																																																																		GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
