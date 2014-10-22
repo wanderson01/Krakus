@@ -5,6 +5,7 @@ public class MagicProjectile : MonoBehaviour {
 
 	public float movementSpeed;
 	public int damage;
+	public BaseStats.DamageEffect damageEffect;
 
 	void Start(){
 		Destroy (this.gameObject, 3);
@@ -16,12 +17,10 @@ public class MagicProjectile : MonoBehaviour {
 
 	void OnTriggerEnter(Collider col){
 
-		if (col.tag == "Map"){
+		if (col.tag == "Map") {
 			Destroy(this.gameObject);
-		}
-		else if (col.tag == "Enemy"){
-			
-			col.GetComponent<BaseStats>().ReceiveDamage(damage);
+		} else if (col.tag == "Enemy") {
+			col.GetComponent<BaseStats>().ReceiveDamage(new DamageType(damage, damageEffect));
 			Destroy(this.gameObject);
 		}
 	}

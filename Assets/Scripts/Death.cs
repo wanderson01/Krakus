@@ -2,8 +2,6 @@
 using System.Collections;
 
 public class Death : MonoBehaviour {
-
-	Collider col1;
 	Collision col2;
 
 	void Start () {
@@ -15,8 +13,6 @@ public class Death : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider col){
-
-		col1 = col;
 		print (col.collider.name);
 
 		if (col.transform.parent.name == "Arthur"){

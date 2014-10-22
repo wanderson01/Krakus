@@ -4,7 +4,7 @@ using System.Collections;
 public class GUILoot : MonoBehaviour {
 
 	public int textSize;
-	private GUIText guiText;
+	new private GUIText guiText;
 
 	void Start () {
 		guiText = GetComponent<GUIText> ();
@@ -14,7 +14,7 @@ public class GUILoot : MonoBehaviour {
 		UpdateLootCount ();
 	}
 
-	void UpdateLootCount(){
+	void UpdateLootCount() {
 		guiText.text = "Gold: " + GameData.Gold + " Iron: " + GameData.Iron + " Stone: " + GameData.Stone;
 		guiText.fontSize = Mathf.Min (Screen.height, Screen.width) / textSize;
 	}

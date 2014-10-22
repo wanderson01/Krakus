@@ -232,7 +232,7 @@ public class EnemyAI : MonoBehaviour {
 		if (target.tag == "Player"){
 			
 			AttackAnimation();
-			target.gameObject.SendMessage("ReceiveDamage", baseStats.damage);
+			target.gameObject.SendMessage("ReceiveDamage", baseStats.getDamage());
 		}		
 	}
 	

@@ -23,7 +23,6 @@ public class GUIWeapon : MonoBehaviour {
 		switch(playerStats.damageEffect){
 
 		case BaseStats.DamageEffect.Physical:
-			print ("teste");
 			spriteRenderer.sprite = weaponSprite[0];
 			break;
 

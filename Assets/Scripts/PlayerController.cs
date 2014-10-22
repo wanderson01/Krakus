@@ -11,7 +11,6 @@ public class PlayerController : MonoBehaviour {
 	public ActionState state;
 	public int attackCombo = 0;
 	public float tempPosition;
-	private float newTime = 0;
 	private Raycast raycast;
 	public bool attacking = false;
 	public int wjCounter;
@@ -146,7 +145,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		moveDirection.y = verticalPower;
-	
+
 		controller.Move(moveDirection * Time.deltaTime);
 	//	print (moveDirection.y);
 	}
@@ -242,7 +241,7 @@ public class PlayerController : MonoBehaviour {
 	
 	void StopWalking(){
 		
-		moveDirection *= 0;
+		moveDirection = Vector2.zero;
 		_animator.SetFloat("walk", 0);
 	}
 
