@@ -2,7 +2,6 @@
 using System.Collections;
 
 public class PlayerController : MonoBehaviour {
-	
 
 	public float jumpForce = 28f;
 	public float gravityForce = 60.0f;
@@ -66,7 +65,9 @@ public class PlayerController : MonoBehaviour {
 
 	void MoveToStartingPosition(){
 
-		transform.position = GameData.SpawnPoint;
+		transform.position = new Vector3(GameData.currentGame.SpawnPoint.x, 
+		                                 GameData.currentGame.SpawnPoint.y, 
+		                                 transform.position.z);
 	}
 	
 	void Move(){
@@ -305,16 +306,16 @@ public class PlayerController : MonoBehaviour {
 		
 		switch (loot.name){
 		case "GoldCoin":
-			GameData.AddGold(10);
+			GameControl.AddGold(10);
 			break;
 		case "IronIngot":
-			GameData.AddIron(1);
+			GameControl.AddIron(1);
 			break;
 		case "Stone":
-			GameData.AddStone(1);
+			GameControl.AddStone(1);
 			break;
 		case "Grimoire":
-			GameData.AddGrimoire(1);
+			GameControl.AddGrimoire(1);
 			break;
 		}		
 	}

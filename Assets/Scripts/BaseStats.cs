@@ -13,6 +13,7 @@ public class BaseStats : MonoBehaviour {
 	public float movementSpeed;
 	public int damage;
 	public DamageEffect damageEffect;
+	private bool dead = false;
 
 	void Start () {
 		currentHealth = maxHealth;
@@ -80,15 +81,16 @@ public class BaseStats : MonoBehaviour {
 	
 	void CheckHealth(){
 		
-		if (currentHealth <= 0){
+		if (currentHealth <= 0 && !dead){
 			Die ();
 		}
 	}
 
 	void Die(){
 
+		dead = true;
 		if (this.gameObject.tag == "Player"){
-			GameController.EndGame();
+			GameControl.GameOver();
 		}
 		Destroy (this.gameObject);
 	//	transform.FindChild ("Arthur").gameObject.SetActive (false);
