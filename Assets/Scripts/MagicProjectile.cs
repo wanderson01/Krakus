@@ -17,7 +17,7 @@ public class MagicProjectile : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider col){
-
+		Debug.Log ("col tag: " + col.tag);
 		if (col.tag == "Map") {
 			Destroy(this.gameObject);
 		} else if (col.tag == "Enemy") {
