@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Menu\Script\Creditos.cs" />
+     <Compile Include="Assets\Menu\Script\KillObject.cs" />
      <Compile Include="Assets\Menu\Script\MainMenu.cs" />
      <Compile Include="Assets\Menu\Script\Opcoes.cs" />
      <Compile Include="Assets\Scripts\ActivateTrigger.cs" />
