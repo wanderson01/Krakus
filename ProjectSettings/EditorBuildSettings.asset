@@ -8,8 +8,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Menu/Cenas/Man1.unity
   - enabled: 1
-    path: Assets/Scenes/Scene1.unity
-  - enabled: 1
-    path: Assets/Menu/Cenas/Level2.unity
+    path: Assets/Scenes/level1.unity
   - enabled: 1
     path: Assets/Menu/Cenas/Creditos.unity

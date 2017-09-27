@@ -27,6 +27,7 @@ Transform:
   m_LocalScale: {x: 3.03698587, y: 3.03698587, z: 3.03698587}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 0
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -45,9 +46,8 @@ SpriteRenderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayer: 0
-  m_SortingOrder: 0
   m_SortingLayerID: 0
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300016, guid: f2e90c2b02863ab4aaca031e9458d190, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000

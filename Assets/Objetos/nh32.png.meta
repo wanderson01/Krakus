@@ -1,0 +1,103 @@
+fileFormatVersion: 2
+guid: 6d85970800a21c8458eb0949bd3b29de
+TextureImporter:
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: -1
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings:
+  - buildTarget: iPhone
+    maxTextureSize: 1024
+    textureFormat: -2
+    compressionQuality: 50
+  spriteSheet:
+    sprites:
+    - name: "Ba\xFA"
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 513
+        width: 30
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: Plataforma
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 235
+        width: 28
+        height: 8
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: Plataforma_Que_Cai
+      rect:
+        serializedVersion: 2
+        x: 672
+        y: 52
+        width: 72
+        height: 8
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: Estalagmite
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 226
+        width: 28
+        height: 27
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: Tomo_Fogo
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 354
+        width: 31
+        height: 30
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: Tomo_Gelo
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 354
+        width: 31
+        height: 30
+      alignment: 0
+      pivot: {x: .5, y: .5}
+  spritePackingTag: 
+  userData: 
